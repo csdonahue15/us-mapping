@@ -1,0 +1,74 @@
+---
+title: "ebsi"
+author: "Chrissy Donahue"
+date: "12/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(readxl)
+ebsi <- read_excel("~/Desktop/BIOS 611/R after dec 11/ebsi.xlsx")
+
+install.packages("viridis")
+
+```
+
+```{r}
+library(sf)
+library(ggplot2)
+library(tmap)
+library(tmaptools)
+library(leaflet)
+library(dplyr)
+library(viridis)
+
+options(scipen = 999)
+
+library(readxl)
+ebsi <- read_excel("~/Desktop/BIOS 611/R after dec 11/ebsi.xlsx")
+
+states_sf <- get_urbn_map("states", sf = TRUE)
+str(states_sf)
+
+map_and_data <- inner_join(states_sf, ebsi)
+
+str(map_and_data)
+
+ggplot(map_and_data) +
+  geom_sf(aes(fill = naloxone_penetration)) +
+  scale_fill_gradient(low = "#FFFFFF", high = "#CC0066") +
+  labs( color="Naloxone Penetration", fill="Naloxone Penetration", shape="Naloxone Penetration")
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
